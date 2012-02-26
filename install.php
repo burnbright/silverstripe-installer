@@ -143,7 +143,9 @@ if(file_exists('mysite/_config.php')) {
 	}
 }
 
-if(file_exists('sapphire/silverstripe_version')) {
+if(file_exists('shop/version')) {
+	$silverstripe_version = file_get_contents('shop/version');
+} else if(file_exists('sapphire/silverstripe_version')) {
 	$sapphireVersionFile = file_get_contents('sapphire/silverstripe_version');
 		if(strstr($sapphireVersionFile, "/sapphire/trunk")) {
 			$silverstripe_version = "trunk";
@@ -183,7 +185,7 @@ if($adminConfig) {
 if(isset($_REQUEST['go']) && !$req->hasErrors() && !$dbReq->hasErrors() && $adminConfig['username'] && $adminConfig['password']) {
 	// Confirm before reinstalling
 	if($alreadyInstalled) {
-		include('sapphire/dev/install/config-form.html');
+		include('installer/config-form.html');
 		
 	} else {
 		$inst = new Installer();
@@ -196,7 +198,7 @@ if(isset($_REQUEST['go']) && !$req->hasErrors() && !$dbReq->hasErrors() && $admi
 
 // Show the config form
 } else {
-	include('sapphire/dev/install/config-form.html');	
+	include('installer/config-form.html');	
 }
 
 /**
@@ -319,7 +321,7 @@ class InstallRequirements {
 		$this->requirePHPVersion('5.2.0', '5.1.0', array("PHP Configuration", "PHP5 installed", null, "PHP version " . phpversion()));
 
 		// Check that we can identify the root folder successfully
-		$this->requireFile('sapphire/dev/install/config-form.html', array("File permissions", 
+		$this->requireFile('installer/config-form.html', array("File permissions", 
 			"Does the webserver know where files are stored?", 
 			"The webserver isn't letting me identify where files are stored.",
 			$this->getBaseDir()
