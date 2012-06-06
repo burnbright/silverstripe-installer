@@ -5,18 +5,19 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<script type="text/javascript" src="sapphire/thirdparty/jquery/jquery.js"></script>
 		<script type="text/javascript" src="sapphire/dev/install/install.js"></script>
-		<link rel="stylesheet" type="text/css" href="themes/blackcandy/css/layout.css">
-		<link rel="stylesheet" type="text/css" href="themes/blackcandy/css/typography.css">
-		<link rel="stylesheet" type="text/css" href="themes/blackcandy/css/form.css">
+		<link rel="stylesheet" type="text/css" href="themes/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="themes/bootstrap/css/layout.css">
+		<link rel="stylesheet" type="text/css" href="themes/bootstrap/css/typography.css">
 		<link rel="stylesheet" type="text/css" href="sapphire/dev/install/install.css">
 		<link rel="shortcut icon" href="favicon.ico">
 	</head>
 	<body>
 		<div id="BgContainer">
-			<div id="Container">
+			<div id="Container" class="container">
 				<div id="Header">
 					<h1>SilverStripe Shop Installation</h1>
-					<p>Version <?php echo $silverstripe_version; ?></p>
+					<p>Version <?php echo $shop_version; ?></p>
+					<?php if($silverstripe_version){ ?><p>(SilverStripe version <?php echo $silverstripe_version; ?>)</p><?php } ?>
 				</div>
 				
 				<div id="Navigation">&nbsp;</div>
@@ -64,7 +65,7 @@
 							<?php } ?>
 							
 							
-							<h4 id="requirements"><em class="inlineBarText">Requirements</em> <span>Step: 1 of 5</span></h4>
+							<h4 id="requirements"><em class="inlineBarText">Requirements</em> <span>Step: 1 of 6</span></h4>
 							<?php $req->showTable(); ?>
 							<?php $dbReq->showTable(); ?>
 							
@@ -73,10 +74,10 @@
 							</p>
 							
 							<div class="action">
-								<input type="submit" class="action" value="Re-check requirements">
+								<input type="submit" class="action btn" value="Re-check requirements">
 							</div>
 							
-							<h4 class="sectionHeading"><em class="inlineBarText">Database</em> <span>Step: 2 of 5</span></h4>
+							<h4 class="sectionHeading"><em class="inlineBarText">Database</em> <span>Step: 2 of 6</span></h4>
 							<div id="database_credentials" class="section">
 								
 								<?php $dbReq->showTable("Database Configuration"); ?>
@@ -183,14 +184,14 @@
 									</div>
 									
 									<div class="action">
-										<input type="submit" class="action" value="Re-check requirements">
+										<input type="submit" class="action btn" value="Re-check requirements">
 									</div>
 								</div>
 							</div>
 							
 							<div class="clear"><!-- --></div>
 							
-							<h4><em class="inlineBarText">CMS Admin Account</em> <span>Step: 3 of 5</span></h4>
+							<h4><em class="inlineBarText">CMS Admin Account</em> <span>Step: 3 of 6</span></h4>
 						
 							<div id="AdminAccount" class="section">
 								
@@ -238,8 +239,14 @@
 								</div>
 							</div>
 							
+							<h4 id="shop"><em class="inlineBarText">Shop</em> <span>Step: 5 of 6</span></h4>
 							
-							<h4 id="install"><em class="inlineBarText">Confirm Install</em> <span>Step: 5 of 5</span></h4>
+							<p id="dummydata-container">
+								<input type="checkbox" id="dummydata" name="dummydata" checked="checked">
+									<label for="dummydata" style="display:inline;">Create dummy shop data</label>
+							</p>
+							
+							<h4 id="install"><em class="inlineBarText">Confirm Install</em> <span>Step: 6 of 6</span></h4>
 							
 							<?php if(isset($hasErrorOtherThanDatabase)) { ?>
 								<p class="error">
@@ -255,9 +262,9 @@
 								
 								<p>
 									<?php if($alreadyInstalled) { ?>
-										<input id="install_button" type="submit" disabled="disabled" class="action" name="go" value="Install SilverStripe">
+										<input id="install_button" type="submit" disabled="disabled" class="action btn btn-success" name="go" value="Install SilverStripe + Shop">
 									<?php } else { ?>
-										<input id="install_button" type="submit" class="action" name="go" value="Install SilverStripe">
+										<input id="install_button" type="submit" class="action btn btn-success" name="go" value="Install SilverStripe + Shop">
 									<?php } ?>
 									
 									<span id="saving_top" style="display: none">
@@ -266,7 +273,7 @@
 										(this will take a minute or so)
 									</span>
 								</p>
-							<?php } ?>
+							<?php } ?>							
 						</form>
 					</div>
 				</div>

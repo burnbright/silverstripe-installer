@@ -13,6 +13,9 @@
 [submodule "payment_paypal"]
 	path = payment_paypal
 	url = git@github.com:burnbright/silverstripe-payment-paypal.git
-[submodule "themes"]
-	path = themes
-	url = git@github.com:burnbright/silverstripe-blackcandy.git
+[submodule "themes/bootstrap"]
+	path = themes/bootstrap
+	url = git@github.com:burnbright/silverstripe-bootstrap.git
+[submodule "themes/bootstrap_shop"]
+	path = themes/bootstrap_shop
+	url = git@github.com:burnbright/silverstripe-bootstrap-shop.git

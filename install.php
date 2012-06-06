@@ -143,9 +143,11 @@ if(file_exists('mysite/_config.php')) {
 	}
 }
 
-if(file_exists('shop/version')) {
-	$silverstripe_version = file_get_contents('shop/version');
-} else if(file_exists('sapphire/silverstripe_version')) {
+if(file_exists('shop/shop_version')) {
+	$shop_version = file_get_contents('shop/shop_version');
+}
+
+if(file_exists('sapphire/silverstripe_version')) {
 	$sapphireVersionFile = file_get_contents('sapphire/silverstripe_version');
 		if(strstr($sapphireVersionFile, "/sapphire/trunk")) {
 			$silverstripe_version = "trunk";
@@ -1112,6 +1114,11 @@ PHP
 		
 		$_SESSION['username'] = $config['admin']['username'];
 		$_SESSION['password'] = $config['admin']['password'];
+		
+		if(isset($_POST['dummydata']) && $_POST['dummydata']){
+			$populateshop = new PopulateShopTask();
+			$populateshop->run(new SS_HTTPRequest("GET", ""));
+		}
 
 		if(!$this->errors) {
 			if(isset($_SERVER['HTTP_HOST']) && $this->hasRewritingCapability()) {
